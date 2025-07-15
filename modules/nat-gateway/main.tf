@@ -8,8 +8,8 @@ resource "aws_eip" "nat_eip" {                             # Changed name from "
   Name        = "${var.name_prefix}-vpc"
   Project     = var.project_tag
   Environment = var.environment
+ }
 }
-
 
 # Create NAT Gateway(s) in the public subnets
 resource "aws_nat_gateway" "public_nat" {                 # Changed name from "this" ➝ "public_nat" for clarity and reusability
@@ -22,5 +22,5 @@ resource "aws_nat_gateway" "public_nat" {                 # Changed name from "t
   Name        = "${var.name_prefix}-vpc"
   Project     = var.project_tag
   Environment = var.environment
+ }
 }
-
