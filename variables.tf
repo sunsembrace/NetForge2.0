@@ -24,9 +24,3 @@ variable "public_subnet_cidrs" {
   type        = list(string)
   description = "CIDR blocks for public subnets"
 }
-
-
-variable "name_prefix" {
-  type    = string
-  default = "netforge"
-}
