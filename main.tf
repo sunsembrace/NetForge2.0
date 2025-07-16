@@ -45,15 +45,15 @@ module "ec2" {
   environment   = var.environment
 }
 
-
-
 # SECURITY GROUP
 module "security_group" {
-  source      = "./modules/security-groups"
-  vpc_id      = module.vpc.vpc_id
-  vpc_cidr    = var.vpc_cidr
+  source     = "./modules/security-group"
   name_prefix = var.name_prefix
+  vpc_id      = module.vpc.vpc_id
 
-  project_tag = var.project_tag
-  environment = var.environment
+  ingress_rules = var.sg_ingress_rules
+  egress_rules  = var.sg_egress_rules
+
+  project_tag  = var.project_tag
+  environment  = var.environment
 }

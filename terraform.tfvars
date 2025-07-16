@@ -18,10 +18,8 @@ public_subnet_cidrs    = ["10.0.101.0/24", "10.0.102.0/24"]
 # NEED TO EC2 BC WE MESSED UP THE TERRAFORM.TFVARS WHEN DOING SECURITY GROUPS??? i feel dumb so basic.
 ami_id                    = "ami-0123456789abcdef0"          # Replace with your AMI ID
 instance_type             = "t3.micro"
-name_prefix               = "netforge"
 instance_name             = "private-ec2"
-project_tag               = "my-project"
-environment               = "dev"
 iam_instance_profile_name = "my-iam-instance-profile"
 
 #SECURITY GROUP
+
