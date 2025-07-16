@@ -35,3 +35,24 @@ variable "public_subnet_cidrs" {
   description = "List of CIDR blocks for public subnets"
   type        = list(string)
 }
+
+#EC2
+variable "ami_id" {
+  type        = string
+  description = "AMI ID for the EC2 instance"
+}
+
+variable "instance_type" {
+  type        = string
+  description = "Instance type for the EC2 instance"
+}
+
+variable "instance_name" {
+  type        = string
+  description = "Name suffix for the EC2 instance"
+}
+
+variable "iam_instance_profile_name" {
+  type        = string
+  description = "Name of the IAM instance profile"
+}

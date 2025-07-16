@@ -27,3 +27,33 @@ module "nat_gateway" {
   project_tag       = var.project_tag                    # Added to support tags inside NAT module
   environment       = var.environment                    # Added to support tags inside NAT module
 }
+
+#EC2
+# EC2 Instance
+module "ec2" {
+  source = "./modules/ec2"
+
+  ami_id                    = var.ami_id
+  instance_type             = var.instance_type
+  subnet_id                 = module.subnets.private_subnet_ids[0]          # Use first private subnet ID
+  security_group_ids        = [module.security_group.security_group_id]    # Wrap single SG ID in a list
+  iam_instance_profile_name = var.iam_instance_profile_name
+
+  name_prefix   = var.name_prefix
+  instance_name = var.instance_name
+  project_tag   = var.project_tag
+  environment   = var.environment
+}
+
+
+
+# SECURITY GROUP
+module "security_group" {
+  source      = "./modules/security-groups"
+  vpc_id      = module.vpc.vpc_id
+  vpc_cidr    = var.vpc_cidr
+  name_prefix = var.name_prefix
+
+  project_tag = var.project_tag
+  environment = var.environment
+}

@@ -26,3 +26,20 @@ output "nat_eip_ids" {
   value       = module.nat_gateway.nat_eip_ids
   description = "List of Elastic IP IDs for the NAT Gateways"
 }
+
+#EC2
+output "ec2_instance_id" {
+  value       = module.ec2.ec2_instance_id
+  description = "EC2 Instance ID"
+}
+
+output "ec2_private_ip" {
+  value       = module.ec2.ec2_private_ip
+  description = "Private IP of EC2"
+}
+
+#SECURITY GROUP
+output "security_group_id" {
+  value       = module.security_group.security_group_id
+  description = "Security Group ID for EC2"
+}
