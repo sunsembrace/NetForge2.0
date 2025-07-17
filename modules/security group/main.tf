@@ -28,8 +28,9 @@ resource "aws_security_group" "sg" {
       description     = lookup(egress.value, "description", null)
     }
   }
-
-  tags = merge({
-    Name = var.name_prefix
-  }, var.tags)
+    tags = {
+    Name        = "${var.name_prefix}-sg"
+    Project     = var.project_tag
+    Environment = var.environment
+  }
 }

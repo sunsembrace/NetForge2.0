@@ -13,10 +13,14 @@ variable "vpc_id" {
   description = "VPC ID to associate with this security group"
 }
 
-variable "tags" {
-  type        = map(string)
-  description = "Tags to apply to the security group"
-  default     = {}
+variable "project_tag" {
+  description = "Project tag to identify which project the resources belong to"
+  type        = string
+}
+
+variable "environment" {
+  description = "Environment tag (e.g., dev, staging, prod)"
+  type        = string
 }
 
 variable "ingress_rules" {

@@ -21,7 +21,7 @@ instance_type             = "t3.micro"
 instance_name             = "private-ec2"
 iam_instance_profile_name = "my-iam-instance-profile"
 
-#SECURITY GROUP - Might need tweaking later. 
+#EC2 SECURITY GROUP - Might need tweaking later. 
 # Name prefix for EC2 security group
 ec2_sg_name_prefix = "netforge-ec2"
 
@@ -54,3 +54,24 @@ ec2_egress_rules = [
   }
 ]
 
+#RDS Security group. 
+rds_sg_name_prefix   = "netforge-rds-sg-"
+rds_sg_description   = "Security group for RDS"
+rds_ingress_rules = [
+  {
+    from_port        = 5432
+    to_port          = 5432
+    protocol         = "tcp"
+    cidr_blocks      = ["10.0.0.0/16"]    # Your VPC CIDR or specific CIDRs allowed
+    description      = "Allow Postgres access from VPC"
+  }
+]
+rds_egress_rules = [
+  {
+    from_port        = 0
+    to_port          = 0
+    protocol         = "-1"
+    cidr_blocks      = ["0.0.0.0/0"]
+    description      = "Allow all outbound"
+  }
+]

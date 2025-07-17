@@ -175,3 +175,6 @@ Variable Scoping in Terraform Modules
 or
 
 Terraform Module Variable Namespacing and Passing
+
+
+#Another issue with tagging - better modularity - look at ec2 tags how it has instance_name and then apply that concept to all other modules. 

@@ -57,7 +57,7 @@ variable "iam_instance_profile_name" {
   description = "Name of the IAM instance profile"
 }
 
-#Security group - Might need tweaking later. 
+#EC2 Security group - Might need tweaking later. 
 variable "ec2_sg_name_prefix" {
   description = "Prefix for the EC2 security group"
   type        = string
@@ -102,4 +102,42 @@ variable "ec2_egress_rules" {
     security_groups  = optional(list(string))
     description      = optional(string)
   }))
+}
+
+#RDS Security group. 
+variable "rds_sg_name_prefix" {
+  type        = string
+  description = "Prefix for the RDS security group name"
+}
+
+variable "rds_sg_description" {
+  type        = string
+  description = "Description for the RDS security group"
+  default     = "Managed by Terraform"
+}
+
+variable "rds_ingress_rules" {
+  type = list(object({
+    from_port        = number
+    to_port          = number
+    protocol         = string
+    cidr_blocks      = optional(list(string))
+    ipv6_cidr_blocks = optional(list(string))
+    security_groups  = optional(list(string))
+    description      = optional(string)
+  }))
+  default = []
+}
+
+variable "rds_egress_rules" {
+  type = list(object({
+    from_port        = number
+    to_port          = number
+    protocol         = string
+    cidr_blocks      = optional(list(string))
+    ipv6_cidr_blocks = optional(list(string))
+    security_groups  = optional(list(string))
+    description      = optional(string)
+  }))
+  default = []
 }
