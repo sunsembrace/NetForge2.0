@@ -1,74 +1,46 @@
-variable "vpc_id" {
-  description = "VPC ID where the security group will be created"
-  type        = string
-}
-
-variable "vpc_cidr" {
-  description = "CIDR block of the VPC"
-  type        = string
-}
-
 variable "name_prefix" {
-  description = "Prefix to use for resource names"
   type        = string
-}
-
-variable "project_tag" {
-  description = "Project tag for identifying resources"
-  type        = string
-}
-
-variable "environment" {
-  description = "Environment name (e.g., dev, staging, prod)"
-  type        = string
+  description = "Prefix for the security group name"
 }
 
 variable "description" {
-  description = "Description of the security group"
   type        = string
-  default     = "Security group"
+  description = "Security group description"
+}
+
+variable "vpc_id" {
+  type        = string
+  description = "VPC ID to associate with this security group"
+}
+
+variable "tags" {
+  type        = map(string)
+  description = "Tags to apply to the security group"
+  default     = {}
 }
 
 variable "ingress_rules" {
   description = "List of ingress rules"
   type = list(object({
-    from_port       = number
-    to_port         = number
-    protocol        = string
-    cidr_blocks     = list(string)
-    description     = optional(string)
-    ipv6_cidr_blocks= optional(list(string))
-    security_groups = optional(list(string))
+    from_port        = number
+    to_port          = number
+    protocol         = string
+    cidr_blocks      = optional(list(string))
+    ipv6_cidr_blocks = optional(list(string))
+    security_groups  = optional(list(string))
+    description      = optional(string)
   }))
-  default = [
-    {
-      from_port   = 0
-      to_port     = 0
-      protocol    = "-1"
-      cidr_blocks = ["0.0.0.0/0"]
-      description = "Allow all inbound"
-    }
-  ]
 }
 
 variable "egress_rules" {
   description = "List of egress rules"
   type = list(object({
-    from_port       = number
-    to_port         = number
-    protocol        = string
-    cidr_blocks     = list(string)
-    description     = optional(string)
-    ipv6_cidr_blocks= optional(list(string))
-    security_groups = optional(list(string))
+    from_port        = number
+    to_port          = number
+    protocol         = string
+    cidr_blocks      = optional(list(string))
+    ipv6_cidr_blocks = optional(list(string))
+    security_groups  = optional(list(string))
+    description      = optional(string)
   }))
-  default = [
-    {
-      from_port   = 0
-      to_port     = 0
-      protocol    = "-1"
-      cidr_blocks = ["0.0.0.0/0"]
-      description = "Allow all outbound"
-    }
-  ]
 }

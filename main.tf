@@ -46,14 +46,13 @@ module "ec2" {
 }
 
 # SECURITY GROUP
-module "security_group" {
-  source     = "./modules/security-group"
-  name_prefix = var.name_prefix
-  vpc_id      = module.vpc.vpc_id
+module "ec2_security_group" {
+  source        = "./modules/security_group"
 
-  ingress_rules = var.sg_ingress_rules
-  egress_rules  = var.sg_egress_rules
-
-  project_tag  = var.project_tag
-  environment  = var.environment
+  name_prefix   = var.ec2_sg_name_prefix
+  description   = var.ec2_sg_description
+  vpc_id        = var.vpc_id
+  tags          = var.common_tags
+  ingress_rules = var.ec2_ingress_rules
+  egress_rules  = var.ec2_egress_rules
 }

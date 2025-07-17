@@ -144,3 +144,34 @@ All subnets are tagged for easy identification.
 
 #Had to fix duplicate name_prefix --> Terraform throws duplicate key error if same variable is declared more than once.
 
+
+#Security group.
+ core concept in Terraform modularity and variable scoping.
+ 
+Problem:
+When using Terraform modules, variable names in the root module and the child module can differ, but you might get confused because you don’t see the exact root variable names (e.g. var.ec2_ingress_rules) used inside the child module. This leads to confusion about whether the variables are connected or missing.
+
+Lesson:
+Terraform modules have their own isolated variable namespaces.
+
+The root module declares variables (e.g. ec2_ingress_rules) and passes values to child modules.
+
+When you call a child module, you provide arguments that map root variables to child module variables.
+
+Inside the child module, you refer only to the variables declared within that module (e.g. ingress_rules), which receive their values from the root module.
+
+This means:
+
+var.ec2_ingress_rules exists only in the root module.
+
+var.ingress_rules exists only inside the child module.
+
+Passing ingress_rules = var.ec2_ingress_rules in the module call connects them.
+
+This concept is called:
+
+Variable Scoping in Terraform Modules
+
+or
+
+Terraform Module Variable Namespacing and Passing
