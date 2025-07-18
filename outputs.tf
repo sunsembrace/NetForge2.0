@@ -38,7 +38,7 @@ output "ec2_private_ip" {
   description = "Private IP of EC2"
 }
 
-#EC2 SECURITY GROUP
+#EC2 & RDS SECURITY GROUP
 output "security_group_id" {
   description = "The ID of the security group"
   value       = aws_security_group.this.id
@@ -54,18 +54,13 @@ output "security_group_arn" {
   value       = aws_security_group.this.arn
 }
 
-#RDS Security group
-output "rds_security_group_id" {
-  value       = module.rds_security_group.sg_id
-  description = "The security group ID for RDS"
+#RDS 
+output "rds_endpoint" {
+  description = "RDS instance endpoint"
+  value       = module.rds.rds_instance_endpoint
 }
 
-output "rds_security_group_name" {
-  value       = module.rds_security_group.sg_name
-  description = "The security group name for RDS"
-}
-
-output "rds_security_group_arn" {
-  value       = module.rds_security_group.sg_arn
-  description = "The security group ARN for RDS"
+output "rds_arn" {
+  description = "RDS instance ARN"
+  value       = module.rds.rds_instance_arn
 }

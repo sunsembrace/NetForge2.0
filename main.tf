@@ -79,17 +79,42 @@ module "rds_security_group" {
 
 #RDS. 
 module "rds" {
-  source                = "./modules/rds"
+  source = "./modules/rds" # path to your RDS module
+
   name_prefix           = var.name_prefix
-  subnet_ids            = module.vpc.private_subnet_ids
-  security_group_ids    = [module.rds_sg.security_group_id]
-  db_name               = var.db_name
-  db_username           = var.db_username
-  db_password           = var.db_password
+  subnet_ids            = var.subnet_ids
+  security_group_ids    = var.security_group_ids
+
+  engine                = var.engine
   engine_version        = var.engine_version
   instance_class        = var.instance_class
   allocated_storage     = var.allocated_storage
   max_allocated_storage = var.max_allocated_storage
+  storage_type          = var.storage_type
+
+  db_name               = var.db_name
+  db_username           = var.db_username
+  db_password           = var.db_password
+
+  multi_az              = var.multi_az
+  publicly_accessible   = var.publicly_accessible
+  skip_final_snapshot   = var.skip_final_snapshot
+  deletion_protection   = var.deletion_protection
+  apply_immediately     = var.apply_immediately
+  backup_retention_period = var.backup_retention_period
+
   project_tag           = var.project_tag
   environment           = var.environment
 }
+
+output "rds_endpoint" {
+  description = "RDS instance endpoint"
+  value       = module.rds.rds_instance_endpoint
+}
+
+output "rds_arn" {
+  description = "RDS instance ARN"
+  value       = module.rds.rds_instance_arn
+}
+
+

@@ -77,10 +77,27 @@ rds_egress_rules = [
 ]
 
 #RDS 
-db_name               = "internaldb"
-db_username           = "admin"
-db_password           = "supersecurepassword123"
-engine_version        = "15.4"
-instance_class        = "db.t3.micro"
-allocated_storage     = 20
-max_allocated_storage = 100
+engine                 = "postgres"
+engine_version         = "15.3"
+instance_class         = "db.t3.medium"
+allocated_storage      = 20
+max_allocated_storage  = 100
+storage_type           = "gp3"
+db_name                = "netforcedb"
+db_username            = "admin"
+db_password            = "your-secure-password-here"
+multi_az               = true
+publicly_accessible    = false
+deletion_protection    = true
+skip_final_snapshot    = true
+apply_immediately      = true
+backup_retention_period = 7
+
+subnet_ids = [
+  "subnet-0aa1bb2cc3dd4ee5f",
+  "subnet-1bb2cc3dd4ee5f6aa"
+]
+
+security_group_ids = [
+  "sg-0a1b2c3d4e5f6g7h8"
+]

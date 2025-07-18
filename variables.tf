@@ -143,58 +143,91 @@ variable "rds_egress_rules" {
 }
 
 #RDS 
-variable "name_prefix" {
+
+variable "subnet_ids" {
+  description = "List of subnet IDs to use for RDS subnet group"
+  type        = list(string)
+}
+
+variable "security_group_ids" {
+  description = "List of security group IDs attached to RDS instance"
+  type        = list(string)
+}
+
+variable "engine" {
+  description = "The database engine to use (e.g., postgres, mysql)"
   type        = string
-  description = "Prefix used across resources"
+}
+
+variable "engine_version" {
+  description = "RDS engine version"
+  type        = string
+}
+
+variable "instance_class" {
+  description = "RDS instance type"
+  type        = string
+}
+
+variable "allocated_storage" {
+  description = "Allocated storage size (GB)"
+  type        = number
+}
+
+variable "max_allocated_storage" {
+  description = "Maximum storage size (GB)"
+  type        = number
+}
+
+variable "storage_type" {
+  description = "Storage type (gp2, gp3, etc.)"
+  type        = string
 }
 
 variable "db_name" {
-  type        = string
   description = "Database name"
+  type        = string
 }
 
 variable "db_username" {
+  description = "Master username"
   type        = string
-  description = "Database master username"
   sensitive   = true
 }
 
 variable "db_password" {
+  description = "Master password"
   type        = string
-  description = "Database master password"
   sensitive   = true
 }
 
-variable "engine_version" {
-  type        = string
-  default     = "15.4"
-  description = "PostgreSQL engine version"
+variable "multi_az" {
+  description = "Deploy multi-AZ RDS instance"
+  type        = bool
 }
 
-variable "instance_class" {
-  type        = string
-  default     = "db.t3.micro"
-  description = "Instance type for the RDS instance"
+variable "publicly_accessible" {
+  description = "Make RDS publicly accessible"
+  type        = bool
 }
 
-variable "allocated_storage" {
+variable "deletion_protection" {
+  description = "Enable deletion protection"
+  type        = bool
+}
+
+variable "skip_final_snapshot" {
+  description = "Skip final snapshot when deleting"
+  type        = bool
+}
+
+variable "apply_immediately" {
+  description = "Apply changes immediately"
+  type        = bool
+}
+
+variable "backup_retention_period" {
+  description = "Backup retention in days"
   type        = number
-  default     = 20
-  description = "Initial DB storage in GB"
 }
 
-variable "max_allocated_storage" {
-  type        = number
-  default     = 100
-  description = "Max autoscaled storage in GB"
-}
-
-variable "project_tag" {
-  type        = string
-  description = "Tag to identify the project"
-}
-
-variable "environment" {
-  type        = string
-  description = "Deployment environment"
-}
