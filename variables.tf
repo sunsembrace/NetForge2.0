@@ -141,3 +141,60 @@ variable "rds_egress_rules" {
   }))
   default = []
 }
+
+#RDS 
+variable "name_prefix" {
+  type        = string
+  description = "Prefix used across resources"
+}
+
+variable "db_name" {
+  type        = string
+  description = "Database name"
+}
+
+variable "db_username" {
+  type        = string
+  description = "Database master username"
+  sensitive   = true
+}
+
+variable "db_password" {
+  type        = string
+  description = "Database master password"
+  sensitive   = true
+}
+
+variable "engine_version" {
+  type        = string
+  default     = "15.4"
+  description = "PostgreSQL engine version"
+}
+
+variable "instance_class" {
+  type        = string
+  default     = "db.t3.micro"
+  description = "Instance type for the RDS instance"
+}
+
+variable "allocated_storage" {
+  type        = number
+  default     = 20
+  description = "Initial DB storage in GB"
+}
+
+variable "max_allocated_storage" {
+  type        = number
+  default     = 100
+  description = "Max autoscaled storage in GB"
+}
+
+variable "project_tag" {
+  type        = string
+  description = "Tag to identify the project"
+}
+
+variable "environment" {
+  type        = string
+  description = "Deployment environment"
+}

@@ -76,3 +76,20 @@ module "rds_security_group" {
   project_tag   = var.project_tag
   environment   = var.environment
 }
+
+#RDS. 
+module "rds" {
+  source                = "./modules/rds"
+  name_prefix           = var.name_prefix
+  subnet_ids            = module.vpc.private_subnet_ids
+  security_group_ids    = [module.rds_sg.security_group_id]
+  db_name               = var.db_name
+  db_username           = var.db_username
+  db_password           = var.db_password
+  engine_version        = var.engine_version
+  instance_class        = var.instance_class
+  allocated_storage     = var.allocated_storage
+  max_allocated_storage = var.max_allocated_storage
+  project_tag           = var.project_tag
+  environment           = var.environment
+}

@@ -75,3 +75,12 @@ rds_egress_rules = [
     description      = "Allow all outbound"
   }
 ]
+
+#RDS 
+db_name               = "internaldb"
+db_username           = "admin"
+db_password           = "supersecurepassword123"
+engine_version        = "15.4"
+instance_class        = "db.t3.micro"
+allocated_storage     = 20
+max_allocated_storage = 100

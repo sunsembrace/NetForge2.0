@@ -178,3 +178,10 @@ Terraform Module Variable Namespacing and Passing
 
 
 #Another issue with tagging - better modularity - look at ec2 tags how it has instance_name and then apply that concept to all other modules. 
+
+Lesson for security group for ec2 & Rds.
+Best Practice in Production
+In real-world production Terraform, it’s better to:
+
+Create security groups before the resource that uses them
+That way, there’s no delay or misconfiguration when the EC2/RDS/etc. resource is provisioned.
