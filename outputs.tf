@@ -64,3 +64,22 @@ output "rds_arn" {
   description = "RDS instance ARN"
   value       = module.rds.rds_instance_arn
 }
+
+
+#SSM Parameter store. 
+output "ssm_parameter_names" {
+  description = "SSM Parameter names created in this deployment"
+  value       = module.ssm_parameters.ssm_parameter_names
+}
+
+
+#IAM ROLE. 
+output "iam_role_name" {
+  description = "The name of the IAM role"
+  value       = module.iam_role.iam_role_name
+}
+
+output "iam_role_arn" {
+  description = "The ARN of the IAM role"
+  value       = module.iam_role.iam_role_arn
+}

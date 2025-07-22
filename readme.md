@@ -185,3 +185,6 @@ In real-world production Terraform, it’s better to:
 
 Create security groups before the resource that uses them
 That way, there’s no delay or misconfiguration when the EC2/RDS/etc. resource is provisioned.
+
+Lessons: IAM Role module.
+Decided to go for using AWS-managed roles rather than writing my own to ensure security is functional but plan to write my own for practice later for further tightening if required to show iniative. 

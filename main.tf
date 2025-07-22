@@ -117,4 +117,21 @@ output "rds_arn" {
   value       = module.rds.rds_instance_arn
 }
 
+#SSM Parameter Store.
+module "ssm_parameters" {
+  source      = "./modules/ssm_parameter_store"
+  parameters  = var.parameters
+  project_tag = var.project_tag
+  environment = var.environment
+}
 
+#IAM policy. 
+module "iam_role" {
+  source             = "./modules/iam"
+  role_name          = var.role_name
+  assume_role_policy = var.assume_role_policy_json
+  managed_policy_arns = var.managed_policy_arns
+
+  project_tag  = var.project_tag
+  environment  = var.environment
+}

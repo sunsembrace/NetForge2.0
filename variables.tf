@@ -231,3 +231,34 @@ variable "backup_retention_period" {
   type        = number
 }
 
+#SSM Parameter
+variable "parameters" {
+  description = "List of SSM parameters to provision"
+  type = list(object({
+    name        = string
+    value       = string
+    type        = string     # String, SecureString, StringList
+    description = string
+  }))
+}
+
+#IAM ROLE. 
+variable "role_name" {
+  description = "Name of the IAM role"
+  type        = string
+  default     = "netforge2-ec2-role"
+}
+
+variable "assume_role_policy_json" {
+  description = "JSON string of the IAM assume role policy document"
+  type        = string
+}
+
+variable "managed_policy_arns" {
+  description = "List of managed policy ARNs to attach to the IAM role"
+  type        = list(string)
+  default = [
+    "arn:aws:iam::aws:policy/AmazonEC2ReadOnlyAccess",
+    "arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore"
+  ]
+}

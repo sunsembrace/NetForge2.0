@@ -125,3 +125,28 @@ parameters = [
     description = "Application environment identifier"
   }
 ]
+
+
+#IAM ROLE. 
+role_name = "netforge2-ec2-role"
+
+assume_role_policy_json = <<EOF
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Principal": {
+        "Service": "ec2.amazonaws.com"
+      },
+      "Action": "sts:AssumeRole"
+    }
+  ]
+}
+EOF
+
+managed_policy_arns = [
+  "arn:aws:iam::aws:policy/AmazonEC2ReadOnlyAccess",
+  "arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore",
+  "arn:aws:iam::aws:policy/CloudWatchAgentServerPolicy"
+]
