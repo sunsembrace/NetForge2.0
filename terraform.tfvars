@@ -101,3 +101,27 @@ subnet_ids = [
 security_group_ids = [
   "sg-0a1b2c3d4e5f6g7h8"
 ]
+
+
+#SSM Parameter store. 
+
+parameters = [
+  {
+    name        = "/netforge/db_username"
+    value       = "admin_user"
+    type        = "String"
+    description = "Username for NetForge PostgreSQL database"
+  },
+  {
+    name        = "/netforge/db_password"
+    value       = "changeme123!"
+    type        = "SecureString"
+    description = "Password for NetForge PostgreSQL database"
+  },
+  {
+    name        = "/netforge/app_env"
+    value       = "dev"
+    type        = "String"
+    description = "Application environment identifier"
+  }
+]
