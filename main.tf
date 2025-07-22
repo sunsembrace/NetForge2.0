@@ -107,15 +107,6 @@ module "rds" {
   environment           = var.environment
 }
 
-output "rds_endpoint" {
-  description = "RDS instance endpoint"
-  value       = module.rds.rds_instance_endpoint
-}
-
-output "rds_arn" {
-  description = "RDS instance ARN"
-  value       = module.rds.rds_instance_arn
-}
 
 #SSM Parameter Store.
 module "ssm_parameters" {
@@ -135,3 +126,16 @@ module "iam_role" {
   project_tag  = var.project_tag
   environment  = var.environment
 }
+
+#KMS  - MIGHT NEED TO REMOVE AND REDO STRUGGLING WITH FIXING SSM PARAMETER STORE WHICH NEEDS TO ALL BE EDITED.
+module "kms_key" {
+  source                  = "./modules/kms"
+  alias_name              = var.kms_alias_name
+  description             = var.kms_description
+  deletion_window_in_days = var.kms_deletion_window_in_days
+  enable_key_rotation     = var.kms_enable_key_rotation
+  environment             = var.environment
+  project_tag             = var.project_tag
+}
+
+

@@ -188,3 +188,9 @@ That way, there’s no delay or misconfiguration when the EC2/RDS/etc. resource 
 
 Lessons: IAM Role module.
 Decided to go for using AWS-managed roles rather than writing my own to ensure security is functional but plan to write my own for practice later for further tightening if required to show iniative. 
+
+Lesson - Debating between KMS integration in my SSM parameter store module as:
+I created a single customer-managed KMS key in Terraform to encrypt secrets stored in SSM Parameter Store. While AWS-managed keys are often enough, I wanted tighter control over key policies and the ability to re-use that key across resources in a secure and auditable way.
+
+Lesson for KMS & SSM integration: 
+have to re-edit SSM parameter store module so it integrates well with SSM and then for root files. 
