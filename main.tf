@@ -138,4 +138,12 @@ module "kms_key" {
   project_tag             = var.project_tag
 }
 
-
+module "ssm_parameter" {
+  source        = "./modules/ssm-parameter"
+  name          = var.ssm_name
+  value         = var.ssm_value
+  type          = var.ssm_type
+  kms_key_id    = module.kms_key.key_id
+  environment   = var.environment
+  project_tag   = var.project_tag
+}

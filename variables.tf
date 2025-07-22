@@ -246,7 +246,6 @@ variable "parameters" {
 variable "role_name" {
   description = "Name of the IAM role"
   type        = string
-  default     = "netforge2-ec2-role"
 }
 
 variable "assume_role_policy_json" {
@@ -257,8 +256,48 @@ variable "assume_role_policy_json" {
 variable "managed_policy_arns" {
   description = "List of managed policy ARNs to attach to the IAM role"
   type        = list(string)
-  default = [
-    "arn:aws:iam::aws:policy/AmazonEC2ReadOnlyAccess",
-    "arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore"
-  ]
+}
+
+#KMS specific variables. 
+
+variable "kms_alias_name" {
+  description = "Alias name for the KMS key (no 'alias/' prefix)"
+  type        = string
+}
+
+variable "kms_description" {
+  description = "KMS key description"
+  type        = string
+}
+
+variable "kms_deletion_window_in_days" {
+  description = "KMS key deletion window in days"
+  type        = number
+}
+
+variable "kms_enable_key_rotation" {
+  description = "Enable automatic KMS key rotation"
+  type        = bool
+}
+
+# --- SSM-specific variables
+variable "ssm_name" {
+  description = "Name of the SSM parameter"
+  type        = string
+}
+
+variable "ssm_value" {
+  description = "Value of the SSM parameter"
+  type        = string
+  sensitive   = true
+}
+
+variable "ssm_type" {
+  description = "Type of the SSM parameter (String, StringList, SecureString)"
+  type        = string
+}
+
+variable "ssm_description" {
+  description = "Description of the SSM parameter"
+  type        = string
 }

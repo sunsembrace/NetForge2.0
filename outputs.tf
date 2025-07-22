@@ -66,12 +66,6 @@ output "rds_arn" {
 }
 
 
-#SSM Parameter store. 
-output "ssm_parameter_names" {
-  description = "SSM Parameter names created in this deployment"
-  value       = module.ssm_parameters.ssm_parameter_names
-}
-
 
 #IAM ROLE. 
 output "iam_role_name" {
@@ -82,4 +76,21 @@ output "iam_role_name" {
 output "iam_role_arn" {
   description = "The ARN of the IAM role"
   value       = module.iam_role.iam_role_arn
+}
+
+#KSM
+output "kms_key_arn" {
+  description = "ARN of the created KMS key"
+  value       = module.kms_key.key_arn
+}
+
+output "kms_key_alias" {
+  description = "Alias name of the created KMS key"
+  value       = module.kms_key.alias_name
+}
+
+#SSM Parameter store
+output "ssm_parameter_name" {
+  description = "Name of the created SSM parameter"
+  value       = module.ssm_parameter.name
 }

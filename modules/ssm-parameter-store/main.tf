@@ -1,16 +1,14 @@
-resource "aws_ssm_parameter" "ssm_parameters" {
-  for_each = {
-    for param in var.parameters : param.name => param
-  }
+resource "aws_ssm_parameter" "ssm_parameter" {
+  name        = var.name
+  description = var.description
+  type        = var.type
+  value       = var.value
 
-  name        = each.value.name
-  type        = each.value.type         # String, SecureString, or StringList
-  value       = each.value.value
-  description = each.value.description
+  key_id      = var.kms_key_id != "" ? var.kms_key_id : null
 
   tags = {
-    Project     = var.project_tag
     Environment = var.environment
-    Name        = each.value.name
+    Project     = var.project_tag
   }
 }
+

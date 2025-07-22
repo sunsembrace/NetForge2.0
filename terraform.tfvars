@@ -103,30 +103,6 @@ security_group_ids = [
 ]
 
 
-#SSM Parameter store. 
-
-parameters = [
-  {
-    name        = "/netforge/db_username"
-    value       = "admin_user"
-    type        = "String"
-    description = "Username for NetForge PostgreSQL database"
-  },
-  {
-    name        = "/netforge/db_password"
-    value       = "changeme123!"
-    type        = "SecureString"
-    description = "Password for NetForge PostgreSQL database"
-  },
-  {
-    name        = "/netforge/app_env"
-    value       = "dev"
-    type        = "String"
-    description = "Application environment identifier"
-  }
-]
-
-
 #IAM ROLE. 
 role_name = "netforge2-ec2-role"
 
@@ -150,3 +126,16 @@ managed_policy_arns = [
   "arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore",
   "arn:aws:iam::aws:policy/CloudWatchAgentServerPolicy"
 ]
+
+#KMS 
+
+
+kms_alias_name             = "netforge-ssm-key"
+kms_description            = "KMS key for encrypting SSM parameters"
+kms_enable_key_rotation    = true
+kms_deletion_window_in_days = 30
+
+ssm_name        = "/netforge-2.0/db-password"
+ssm_description = "Database password"
+ssm_type        = "SecureString"
+ssm_value       = "YourSecurePasswordHere!"
