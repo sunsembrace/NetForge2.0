@@ -194,3 +194,5 @@ I created a single customer-managed KMS key in Terraform to encrypt secrets stor
 
 Lesson for KMS & SSM integration: 
 have to re-edit SSM parameter store module so it integrates well with SSM and then for root files. 
+
+Lesson: MAde a basic bootstrap.sh but realised I could upgrade it by using an if statement for installing packages because Amazon linux 2 already comes preinstalled with SSM agent. Learnt about 2nd version (wip) being indempotent and has placeholders for future scaling compared to one similar to how we used docker as a placeholder. Also realised after I need a jq to be installed because amazon linux 2 is usually missing that to make the tagging work as we need AWS cli - Havent implemented this yet though.
